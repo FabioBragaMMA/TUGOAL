@@ -1,0 +1,1 @@
+ C:\\Users\\Simao\ Fernandes\\Desktop\\PI_2026AM_Grupo01_Final\\tugoal\\.dart_tool\\flutter_build\\af1fa82f9a25b1ec6f1024574468bfe0\\native_assets.json: 

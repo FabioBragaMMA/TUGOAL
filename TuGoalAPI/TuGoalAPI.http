@@ -1,0 +1,105 @@
+@TuGoalAPI_HostAddress = https://localhost:7174
+
+@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkB0dWdvYWwucHQiLCJyb2xlIjoiQWRtaW5pc3RyYWRvciIsIm5iZiI6MTc4MDkyNTcyNCwiZXhwIjoxNzgwOTMyOTI0LCJpYXQiOjE3ODA5MjU3MjQsImlzcyI6IlR1R29hbEFQSV9BdXRoU2VydmVyIiwiYXVkIjoiVHVHb2FsQXBwX01vYmlsZUNsaWVudCJ9.tw9WpEnPZ2taJ0TzM3xbkb6zoxFXk9O6d3Iqz74LnV8
+
+### Qualquer um pode ver
+
+### Ver Ligas
+GET {{TuGoalAPI_HostAddress}}/api/campeonatos
+Accept: application/json
+
+### Ver Equipas
+GET {{TuGoalAPI_HostAddress}}/api/equipas
+Accept: application/json
+
+### Ver Plantel
+GET {{TuGoalAPI_HostAddress}}/api/jogadores/equipa/2
+Accept: application/json
+
+### Ver Calendário
+GET {{TuGoalAPI_HostAddress}}/api/jogos
+Accept: application/json
+
+### Ver Quem Marcou (Ex: jogo 1)
+GET {{TuGoalAPI_HostAddress}}/api/eventos/jogo/1
+Accept: application/json
+
+### Ver Tabela Classificativa
+GET {{TuGoalAPI_HostAddress}}/api/estatisticas/classificacao
+Accept: application/json
+
+
+
+### Autenticação
+
+### Registar um adepto novo
+POST {{TuGoalAPI_HostAddress}}/api/auth/registar
+Content-Type: application/json
+
+{
+  "nome": "Adepto",
+  "email": "novo_adepto@tugoal.pt",
+  "passwordHash": "adepto1234",
+  "perfil": "Adepto"
+}
+
+### Fazer Login do Administrador
+POST {{TuGoalAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@tugoal.pt",
+  "password": "Admin1."
+}
+
+
+
+### ADMINISTRADOR
+
+### Adicionar uma Nova Equipa
+POST {{TuGoalAPI_HostAddress}}/api/equipas
+Authorization: Bearer {{Token}}
+Content-Type: application/json
+
+{
+  "nome": "Vitória SC",
+  "ano_Fundacao": 1922,
+  "emblema": "https://link_vitoria.png",
+  "ativo": true
+}
+
+### Agendar um Novo Jogo
+POST {{TuGoalAPI_HostAddress}}/api/jogos
+Authorization: Bearer {{Token}}
+Content-Type: application/json
+
+{
+  "iD_Campeonato": 1,
+  "jornada": 2,
+  "data_Hora": "2026-02-20T20:30:00",
+  "iD_Equipa_Casa": 1,
+  "iD_Equipa_Fora": 3,
+  "estado_Jogo": "Por jogar"
+}
+
+### Dar o Apito Final
+PUT {{TuGoalAPI_HostAddress}}/api/jogos/2/terminar
+Authorization: Bearer {{Token}}
+Content-Type: application/json
+
+{
+  "golos_Casa": 1,
+  "golos_Fora": 1
+}
+
+### Registar um Golo
+POST {{TuGoalAPI_HostAddress}}/api/eventos
+Authorization: Bearer {{Token}}
+Content-Type: application/json
+
+{
+  "iD_Jogo": 2,
+  "iD_Jogador": 5,
+  "tipo_Evento": "Golo",
+  "minuto": 75
+}
